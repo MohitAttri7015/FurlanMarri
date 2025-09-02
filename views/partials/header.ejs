@@ -1,0 +1,87 @@
+<nav>
+    <div class="nav-wrapper">
+        <div class="nav-right nav-part">
+            <a href="#" id="menuLink" onclick="event.preventDefault()" class="slide disappear nav-links menu">
+                <span class="text-top">MENU <i class="ri-arrow-down-s-fill"></i></span>
+                <span class="text-bottom">MENU <i class="ri-arrow-down-s-fill"></i></span>
+            </a>
+
+            <a href="#" id="quoteLink" onclick="event.preventDefault()" class="slide disappear nav-links quote">
+                <span class="text-top">QUOTE <i class="ri-arrow-down-s-fill"></i></span>
+                <span class="text-bottom">QUOTE <i class="ri-arrow-down-s-fill"></i></span>
+            </a>
+
+            <div class="menu-btn" id="menuBtn">
+                <div class="line line1"></div>
+                <div class="line line2"></div>
+            </div>
+        </div>
+
+        <div class="nav-middle">
+            <a href="/" class="logo">FURLAN MARRI</a>
+        </div>
+
+        <div class="nav-left nav-part">
+            <% if (loggedIn) { %>
+                <a href="#" class="nav-links disappear"><span class="bottom-arrow"
+                        onclick="location.href='/users/profile'">PROFILE</span></a>
+                <% } else { %>
+                    <a href="#" class="nav-links disappear"><span class="bottom-arrow"
+                            onclick="location.href='/users/login'">LOGIN</span> / <span class="bottom-arrow"
+                            onclick="location.href='/users/SignUp'">SIGNUP</span></a>
+                    <% } %>
+
+                        <% if (loggedIn && isOwner) { %>
+                            <a href="/owners/createProduct" class="nav-links bottom-arrow">ADD PRODUCTS</a>
+                            <% } else if(loggedIn && !isOwner) { %>
+                                <a href="" class="nav-links bottom-arrow disappear">USD <i
+                                        class="ri-arrow-down-s-fill"></i></a>
+                                <a href="/cart" class="nav-links bottom-arrow">CART <%= user && user.cart && user.cart.length > 0 ? `(${user.cart.length})` : '' %></a>
+                                <% } else { %>
+                                    <a href="" class="nav-links bottom-arrow disappear">USD <i
+                                            class="ri-arrow-down-s-fill"></i></a>
+                                    <a href="/cart" class="nav-links bottom-arrow">
+                                        CART
+                                    </a>
+
+
+                                    <% } %>
+        </div>
+    </div>
+
+
+    <div id="nav-dropdown">
+        <div class="nav-dropdown-wrapper">
+            <div class="dropdown-section menu-section">
+                <div class="dropdown-link-wrapper">
+                    <a href="/products/allWatches"><span>ALL WATCHES</span> <i class="ri-arrow-right-s-fill"></i></a>
+                    <a href="/products/allCollection"><span>ALL COLLECTION</span> <i class="ri-arrow-right-s-fill"></i></a>
+                    <a href="/services"><span>SERVICES</span> <i class="ri-arrow-right-s-fill"></i></a>
+                    <a href="/contactUs"><span>CONTACT US</span> <i class="ri-arrow-right-s-fill"></i></a>
+                </div>
+
+                <div class="dropdown-img">
+                    <img src="" alt="">
+                </div>
+            </div>
+
+
+            <div class="dropdown-section quote-section" style="display:none;">
+                <div class="dropdown-link-wrapper">
+                    <a href="#" onclick="event.preventDefault()"><span>WHERE</span> <i
+                            class="ri-arrow-right-s-fill"></i></a>
+                    <a href="#" onclick="event.preventDefault()"><span>TIME</span> <i
+                            class="ri-arrow-right-s-fill"></i></a>
+                    <a href="#" onclick="event.preventDefault()"><span>MEETS</span> <i
+                            class="ri-arrow-right-s-fill"></i></a>
+                    <a href="#" onclick="event.preventDefault()"><span>PERFECTION</span> <i
+                            class="ri-arrow-right-s-fill"></i></a>
+                </div>
+
+                <div class="dropdown-img">
+                    <img src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

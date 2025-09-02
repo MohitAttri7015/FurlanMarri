@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Watches</title>
+    <link rel="stylesheet" href="/stylesheets/DiscoVolante.css">
+    <link rel="stylesheet" href="/stylesheets/collectionWatches.css">
+    <link rel="stylesheet" href="/stylesheets/nav.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
+</head>
+
+<body>
+
+
+    <%- include('partials/header') %>
+        <div id="collectionWatchesBanner" class="DiscoVolante-banner">
+            <div class="collectionWatchesContnet">
+                <span>COLLECTION</span>
+                <p>DISCO VOLANTE</p>
+            </div>
+        </div>
+
+        <div id="collectionWatches">
+            <p class="collectionWatches-title">DISCO VOLANTE</p>
+            <div class="collectionWatcheswrapper">
+                <% DiscoVolantes.forEach(function(DiscoVolante){ %>
+                    <div class="item">
+                        <a href="/products/productDetail/<%= DiscoVolante._id %>">
+                            <div class="image">
+                                <img src="/uploads/<%= DiscoVolante.mainImage %>" alt="" class="main-item-image">
+                                <img src="/uploads/<%= DiscoVolante.zoomImage %>" alt="" class="zoom-item-image">
+                            </div>
+                        </a>
+                        <div class="itme-con">
+                            <span class="item-name">
+                                <%= DiscoVolante.name %>
+                            </span>
+                            <span class="item-price">USD <%= DiscoVolante.price %></span>
+                            <a href="/products/productDetail/<%= DiscoVolante._id %>">
+                                DISCOVER <i class="ri-arrow-right-s-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+
+
+        <div id="MOVEMENT">
+            <div class="MOVEMENT-section">
+                <div class="MOVEMENT-image">
+                    <img src="/assests/DiscoVolante-img-2.jfif" alt="MOVEMENT">
+                </div>
+                <div class="MOVEMENT-text">
+                    <span class="head-1">MOVEMENT</span>
+                    <span class="head-2">THE STORY OF PESEUX 7001</span>
+                    <div class="MOVEMENT-p-wrapper">
+                        <p>
+                            At just 2.5 mm thick, Caliber 7001 is the ideal choice for this project, given the
+                            watchmakers’ desire to produce a watch as thin as the first release. Thus, the movement fits
+                            perfectly into the new 38 mm diameter case. This manually wound watch revives the Art Deco
+                            style, featuring design codes from the 1930s to 1950s but with an intermediate diameter.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('partials/footer') %>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+            <script src="/javascripts/nav.js"></script>
+</body>
+
+</html>

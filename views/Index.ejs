@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet" href="/stylesheets/nav.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
+</head>
+
+<body>
+
+    <%- include('partials/error') %>
+
+    
+    <%- include('partials/header') %>
+
+        <div id="banner">
+            <video autoplay muted loop id="banner-video">
+                <source src="/assests/main-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <div class="banner-content">
+                <div class="banner-content-wrapper">
+                    <span class="span-text span1">NEW RELEASE</span>
+                    <h1>Mechaquartz Chronographs</h1>
+                    <span class="span-text span2">Some colors just feel like summer</span>
+                    <a href="/products/allWatches" class="slide discoverBtn">
+                        <span class="text-top">DISCOVER <i class="ri-arrow-down-s-fill"></i></span>
+                        <span class="text-bottom">DISCOVER <i class="ri-arrow-down-s-fill"></i></span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="after-banner">
+            <span>DESIGNED FOR DETAILS</span>
+            <p>The brand built in under a minute by its community</p>
+        </div>
+
+        <div id="feature-product">
+            <div class="feature-head">
+                <h2 style="opacity: 0;">hello</h2>
+                <span>FEATURE PRODUCTS</span>
+                <div class="slider-btn">
+                    <div class="slide-i prev-btn-1">
+                        <i class="ri-arrow-left-s-fill i-top"></i>
+                        <i class="ri-arrow-left-s-fill i-bottom"></i>
+                    </div>
+                    <div class="slide-i next-btn-1">
+                        <i class="ri-arrow-right-s-fill i-top"></i>
+                        <i class="ri-arrow-right-s-fill i-bottom"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <% fiveProducts.forEach(function(fiveProduct){ %>
+                         <div class="swiper-slide">
+                            <img src="/uploads/<%= fiveProduct.mainImage %>" class="watch-image" alt="watch">
+                            <div class="slide-content">
+                                <h2 class="slide-title"><%= fiveProduct.name %></h2>
+                                <a href="/products/productDetail/<%= fiveProduct._id %>" class="discover-link">DISCOVER <i class="ri-arrow-right-s-fill"></i></a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+
+        <div id="press-corner">
+            <span>PRESS CORNER</span>
+
+            <div class="hover-text" id="hoverText">
+                <h1 class="active">"Furlan Marri won the Horological Revelation Prize"</h1>
+            </div>
+
+            <div class="logos">
+                <img src="/assests/press-corner-img-1.png" style="width: 70px;"
+                    data-text='"Furlan Marri won the Horological Revelation Prize"'>
+                <img src="/assests/press-corner-img-2.png" style="width: 110px;"
+                    data-text='"One of the things that leaped out at me when I finally got the watches in hand was how good the finishing was."'>
+                <img src="/assests/press-corner-img-3.png" style="width: 120px;"
+                    data-text='"The new Furlan Marri shows all the facets of a true horological gem. It looks excellent."'>
+                <img src="/assests/press-corner-img-4.png" style="width: 160px;"
+                    data-text='"A New Watch Brand Tells a Story. Furlan Marri intends to honor Swiss horology, but at affordable prices."'>
+                <img src="/assests/press-corner-img-5.png" style="width: 80px;"
+                    data-text='"An example of a successful crowdfunding campaign"'>
+                <img src="/assests/press-corner-img-6.png" style="width: 60px;"
+                    data-text='"Mechaquartz" watches are a thing – but what exactly are they?'>
+            </div>
+            <div class="another-two-logo">
+                <img src="/assests/press-corner-img-7.png" style="width: 130px;"
+                    data-text='"Furlan Marri: The Watch Brand the World Needs"'>
+                <img src="/assests/press-corner-img-8.png" style="width: 60px;"
+                    data-text='"The aesthetic is simple but intrinsically appealing, and it is honestly priced and strong value."'>
+            </div>
+        </div>
+
+        <div id="best-sellers-product">
+            <div class="best-sellers-product-head">
+                <h2 style="opacity: 0;">hello</h2>
+                <span>OUR BEST SELLERS</span>
+                <div class="slider-btn">
+                    <div class="slide-i prev-btn-2">
+                        <i class="ri-arrow-left-s-fill i-top"></i>
+                        <i class="ri-arrow-left-s-fill i-bottom"></i>
+                    </div>
+                    <div class="slide-i next-btn-2">
+                        <i class="ri-arrow-right-s-fill i-top"></i>
+                        <i class="ri-arrow-right-s-fill i-bottom"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper mySwiper2">
+                <div class="swiper-wrapper">
+                    <% bestSellersProducts.forEach(function(bestSellersProduct) { %>
+                        <div class="swiper-slide">
+                            <img src="/uploads/<%= bestSellersProduct.bestSellers %>" class="" alt="watch">
+                            <div class="watch-content">
+                                <p class="watch-title"><%= bestSellersProduct.name %></p>
+                                <p class="watch-category"><%= bestSellersProduct.category %></p>
+                                <a href="/products/productDetail/<%= bestSellersProduct._id %>" class="slide discoverBtn watch-disBtn">
+                                    <span class="text-top">SEE PRODUCT <i class="ri-arrow-down-s-fill"></i></span>
+                                    <span class="text-bottom">SEE PRODUCT <i class="ri-arrow-down-s-fill"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+
+        <div id="our-story">
+            <div class="our-story-wrapper">
+                <div class="image">
+                    <img src="/assests/our-story-img.jfif" alt="Our Story">
+                </div>
+
+                <div class="content">
+                    <span class="our-story-title">OUR STORY</span>
+                    <p class="our-story-subtitle">A PASSION FULL OF ADVENTURES</p>
+                    <div class="our-story-content">
+                        <p class="our-story-description">
+                            Furlan Marri serves as a daily reminder to those who gave so much by the past.
+                            We are the sums of the things we've done, the people we cherish and the places we've been.
+                            Discover our story and the people behind the brand.
+                        </p>
+                        <a href="#" class="slide discoverBtn watch-disBtn our-stry-btn">
+                            <span class="text-top">DISCOVER <i class="ri-arrow-down-s-fill"></i></span>
+                            <span class="text-bottom">DISCOVER <i class="ri-arrow-down-s-fill"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="Book">
+            <div class="Book-wrapper">
+                <div class="image">
+                    <img src="/assests/our-story-after-img.jfif" alt="Our Story">
+                </div>
+
+                <div class="content">
+                    <span class="Book-title">Showroom and online meeting</span>
+                    <p class="Book-subtitle">BOOK YOUR FURLAN MARRI EXPERIENCE</p>
+                    <div class="Book-content">
+                        <p class="Book-description">
+                            Interested in discovering the Furlan Marri collection in more detail? Explore it in person
+                            or online. Book a showroom visit or schedule a virtual meeting today.
+                        </p>
+                        <a href="#" class="slide discoverBtn watch-disBtn Book-btn">
+                            <span class="text-top">BOOK AN APPOINTMENT <i class="ri-arrow-down-s-fill"></i></span>
+                            <span class="text-bottom">BOOK AN APPOINTMENT <i class="ri-arrow-down-s-fill"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <%- include('partials/footer') %>
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+        <script src="/javascripts/nav.js"></script>
+        <script src="/javascripts/main.js"></script>
+</body>
+
+</html>

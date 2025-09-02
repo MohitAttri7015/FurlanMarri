@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/stylesheets/signUp.css">
+    <link rel="stylesheet" href="/stylesheets/nav.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
+</head>
+<body>
+    
+    <%- include('partials/error') %>
+
+    
+    <%- include('partials/header') %>
+
+    <div id="signup">
+        <div class="signup-wrapper">
+            <!-- Left Image -->
+            <div class="signup-left">
+                <video autoplay muted loop id="signup-video">
+                    <source src="/assests/For-signUp.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <!-- Right Form -->
+            <div class="signup-form">
+            
+            <a href="/" class="go-home"><i class="ri-arrow-left-line"></i></a>
+
+            <span class="sign-up-heading">Create an Account</span>
+            <p>Already have an account? <a href="/users/login">Log in</a></p>
+
+            <!-- ✅ Real Form -->
+            <form action="/users/signup" method="POST" id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" name="terms" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms & Condition</a></label>
+                </div>
+
+                <button type="submit" class="signup-btn slide">
+                    <span class="text-top">Create Account</span>
+                    <span class="text-bottom">Create Account</span>
+                </button>
+            </form>
+
+            <p style="text-align:center; margin:10px 0;" class="or">or</p>
+
+            <div class="social-login">
+                <a href="" class="slide">
+                    <span class="text-top"><img src="/assests/google.png" alt=""> Continue with Google</span>
+                    <span class="text-bottom"><img src="/assests/google.png" alt=""> Continue with Google</span>
+                </a>
+                <a href="" class="slide">
+                    <span class="text-top"><img src="/assests/facebook.png" alt=""> Continue with Facebook</span>
+                    <span class="text-bottom"><img src="/assests/facebook.png" alt=""> Continue with Facebook</span>
+                </a>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="/javascripts/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: lighter;
+}
+
+p,
+span,
+a {
+    font-family: Henderson Sans Basic Light;
+    font-weight: bolder;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+
+body {
+    overflow-x: hidden;
+}
+
+
+#collectionWatchesBanner{
+    width: 100%;
+    height: 80vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    background-position: center;
+}
+
+.MECHAQUARTZ-banner{
+    background-image: url('/assests/MECHAQUARTZ-banner-img.jfif') !important;
+}
+
+
+#collectionWatchesBanner::before{
+    content: '';
+    position: absolute;
+    background: linear-gradient(180deg, #1a232e33, #1a232e00 52.06%, #1a232e33), linear-gradient(#28252b80, #28252b80);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+
+#collectionWatchesBanner .collectionWatchesContnet{
+    color: white;
+    z-index: 2;
+    position: relative;
+    max-width: 1300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: end;
+    padding: 5rem 1rem;
+    margin: auto;
+}
+
+
+#collectionWatchesBanner .collectionWatchesContnet span{
+    font-size: 0.8rem;
+}
+
+#collectionWatchesBanner .collectionWatchesContnet p{
+    font-size: 2rem;
+}
+
+
+
+
+
+#collectionWatches{
+    width: 100%;
+    background-color: #F6F6F6;
+    padding: 5rem 3rem;
+}
+
+#collectionWatches .collectionWatches-title{
+    font-size: 0.8rem;
+    background-color: black;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    margin-bottom: 5rem;
+    width: fit-content;
+}
+
+
+#collectionWatches .collectionWatcheswrapper{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+#collectionWatches .collectionWatcheswrapper .item {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+#collectionWatches .collectionWatcheswrapper .item .image {
+    position: relative;
+    width: 500px; 
+    height: 500px;
+    margin: auto;
+}
+
+#collectionWatches .main-item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.4s ease;
+}
+
+#collectionWatches .zoom-item-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    z-index: 2;
+}
+
+#collectionWatches .itme-con {
+    margin-top: 1rem;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#collectionWatches .itme-con .item-name,
+#collectionWatches .itme-con .item-price,
+#collectionWatches .itme-con a {
+    display: block;
+    margin: 0.3rem 0;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: black;
+}
+
+#collectionWatches .itme-con .item-price,
+#collectionWatches .itme-con a{
+    font-size: 0.8rem !important;
+}
+
+
+
+/* Initially hide discover button */
+#collectionWatches .itme-con a {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Hover effect */
+#collectionWatches .item:hover .main-item-image {
+    opacity: 0;
+}
+
+#collectionWatches .item:hover .zoom-item-image {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#collectionWatches .item:hover .item-name,
+#collectionWatches .item:hover .item-price {
+    opacity: 0;
+}
+
+#collectionWatches .item:hover .itme-con a {
+    opacity: 1;
+}
+
+
+
+#MOVEMENT{
+    padding: 60px 5%;
+    margin-bottom: 4rem;
+    margin-top: 5rem;
+}
+
+.MOVEMENT-section {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.MOVEMENT-section .MOVEMENT-image{
+    width: 40%;
+    height: 600px;
+}
+
+.MOVEMENT-section img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.MOVEMENT-text {
+    width: 50%;
+    /* background-color: red; */
+    padding-top: 4rem;
+    padding-left: 5rem;
+}
+
+.MOVEMENT-text .head-1 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.MOVEMENT-text .head-2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+    display: block;
+}
+
+.MOVEMENT-text .MOVEMENT-p-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.MOVEMENT-text p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    width: 80%;
+    color: #444;
+}
+
+
+
+
+
+@media (max-width: 1130px) {
+    #collectionWatches .collectionWatcheswrapper .item .image {
+        width: 450px;
+        height: 450px;
+    }
+
+    #collectionWatches .zoom-item-image {
+        width: 350px;
+        height: 350px;
+    }
+}
+
+
+@media (max-width: 990px) {
+    #collectionWatches {
+        padding: 5rem 1rem;
+    }
+
+    #collectionWatches .collectionWatcheswrapper .item .image {
+        width: 350px;
+        height: 350px;
+    }
+
+    #collectionWatches .zoom-item-image {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+
+@media(max-width: 930px) {
+     #MOVEMENT
+    {
+        padding: 60px 1%;
+    }
+}
+
+
+@media(max-width: 915px) {
+    .MOVEMENT-text
+    {
+        padding-left: 2rem;
+    }
+
+    .MOVEMENT-section .MOVEMENT-image
+    {
+        width: 40%;
+        height: 500px;
+    }
+}
+
+@media(max-width: 900px) {
+    .MOVEMENT-section{
+        flex-direction: column;
+    }
+
+    .MOVEMENT-section .MOVEMENT-image
+    {
+        width: 60%;
+        height: auto;
+        margin: auto;
+    }
+
+    .MOVEMENT-text {
+        width: 100%;
+        padding-left: 1rem;
+    }
+
+    .MOVEMENT-text p{
+        width: 100%;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .MOVEMENT-section {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+
+}
+
+
+@media (max-width: 750px) {
+    #collectionWatches .zoom-item-image {
+        width: 250px;
+        height: 250px;
+    }
+
+    #collectionWatches .collectionWatcheswrapper .item .image {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 700px) {
+     .MOVEMENT-section .MOVEMENT-image
+    {
+        width: 100%;
+        height: auto;
+    }
+
+}
+
+
+
+@media (max-width: 600px) {
+    #collectionWatches .collectionWatcheswrapper .item .image {
+        width: 250px;
+        height: 250px;
+    }
+
+    #collectionWatches .zoom-item-image {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+
+@media (max-width: 500px) {
+    #collectionWatches .collectionWatcheswrapper{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #collectionWatches .collectionWatcheswrapper .item .image {
+        width: 350px;
+        height: 350px;
+    }
+
+    #collectionWatches .zoom-item-image {
+        width: 300px;
+        height: 300px;
+    }
+
+    
+    .MOVEMENT-text {
+        width: 100%;
+        padding-left: 0;
+    }
+}
+
+
+@media (max-width: 420px) {
+    .MOVEMENT-text
+    {
+        padding-top: 2rem;
+    }
+
+    .MOVEMENT-text .head-2{
+        font-size: 1.5rem;
+    }
+
+    .MOVEMENT-text p {
+        font-size: 0.8rem;
+    }
+}
+
+
+@media (max-width: 400px) {
+    #collectionWatches .collectionWatcheswrapper .item .image {
+        width: 250px;
+        height: 250px;
+    }
+
+    #collectionWatches .zoom-item-image {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+
+
+@media (max-width: 370px) {
+    .MOVEMENT-text .head-2 {
+        margin-bottom: 2rem;
+    }
+
+    .MOVEMENT-text .head-2 {
+        font-size: 1.2rem;
+    }
+}

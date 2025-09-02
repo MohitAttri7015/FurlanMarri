@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="/stylesheets/nav.css">
+    <link rel="stylesheet" href="/stylesheets/cart.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
+</head>
+
+<body>
+
+    <%- include('partials/error') %>
+
+
+        <%- include('partials/header') %>
+
+
+            <div class="cart-container">
+                <span class="cart-title">CART</span>
+                <% if(user.cart.length> 0) { %>
+                    <div class="cart-wrapper">
+                        <div class="cart-items">
+                            <div class="cart-item top-item">
+                                <p style="font-size: 0.8rem;">ITEMS</p>
+                                <p style="font-size: 0.8rem;">QUANTITY</p>
+                                <p style="font-size: 0.8rem;">TOTAL</p>
+                            </div>
+                            <% user.cart.forEach(function(userCart){ %>
+                                <div class="cart-item">
+                                    <div class="item-details">
+                                        <img src="/uploads/<%= userCart.mainImage %>" alt="Product 1">
+                                        <div>
+                                            <p class="prd-name">
+                                                <%= userCart.name %>
+                                            </p>
+                                            <p class="prd-ctgry">
+                                                <%= userCart.category %>
+                                            </p>
+                                            <p class="prd-price">$<%= userCart.price %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="quantity">
+                                        <button class="qty-decrease">-</button>
+                                        <span class="qty-number">
+                                            <%= userCart.quantity %>
+                                        </span>
+                                        <button class="qty-decrincrease">+</button>
+                                    </div>
+
+                                    <div class="total">
+                                        <p class="total-title">Total</p>
+                                        <div class="total-wrapper">
+                                            <p class="item-total">$<%= (userCart.price * userCart.quantity).toFixed(2)
+                                                    %>
+                                            </p>
+                                            <a href="/removeFromCart/<%= userCart.productId %>"
+                                                style="text-decoration: none;">
+                                                <i class="ri-xrp-fill remove-item"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+
+                        <div class="cart-summary">
+                            <span class="summary">SUMMARY</span>
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span>$<%= user.cart.reduce((acc, item)=> acc + (item.price * item.quantity),
+                                        0).toFixed(2) %></span>
+                            </div>
+                            <div class="summary-row">
+                                <span>International Shipping</span>
+                                <span>$18.00</span>
+                            </div>
+                            <div class="summary-total">
+                                <span>Total</span>
+                                <span>$<%= (user.cart.reduce((acc, item)=> acc + (item.price * item.quantity), 0) +
+                                        18).toFixed(2) %></span>
+                            </div>
+                            <a href="#" class="checkout-btn">CHECK OUT</a>
+                            <a href="/products/allWatches" class="checkout-btn-secondary">Continue Shopping</a>
+
+
+
+                        </div>
+                    </div>
+                    <% } else { %>
+                        <div class="nothing">
+                            <p>Nothing in your cart !</p>
+                            <a href="/products/allWatches" class="checkout-btn-secondary">Continue Shopping</a>
+                        </div>
+                        <% } %>
+            </div>
+
+
+
+
+            <%- include('partials/footer') %>
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+                <script src="/javascripts/nav.js"></script>
+
+                <script>
+                    // ===== cart quantity ajax handlers) =====
+                    (function () {
+                        // Helper to format money like this ($xx.xx)
+                        const money = (n) => '$' + Number(n).toFixed(2);
+
+                        // Find every cart item row on page
+                        document.querySelectorAll('.cart-item').forEach(itemEl => {
+                            // Buttons and display elements inside the row
+                            const decBtn = itemEl.querySelector('.qty-decrease');
+                            const incBtn = itemEl.querySelector('.qty-decrincrease'); 
+                            const qtySpan = itemEl.querySelector('.qty-number');
+                            const itemTotalEl = itemEl.querySelector('.item-total');
+
+                            // Find the remove anchor that contains the productId in the href
+                            const removeAnchor = itemEl.querySelector('a[href*="/removeFromCart/"]');
+                            if (!removeAnchor) return; // safety
+
+                            // Extract productId from href: '/removeFromCart/<productId>'
+                            const href = removeAnchor.getAttribute('href') || '';
+                            const m = href.match(/\/removeFromCart\/([^\/?#]+)/);
+                            if (!m) return;
+                            const productId = m[1];
+
+                            // summary elements (these are in your EJS)
+                            const subtotalEl = document.querySelectorAll('.summary-row')[0].querySelectorAll('span')[1];
+                            const totalEl = document.querySelector('.summary-total').querySelectorAll('span')[1];
+
+                            // Update DOM with server values
+                            const applyServerValues = (data) => {
+                                if (data.removed) {
+                                    // remove this item row from DOM
+                                    itemEl.remove();
+                                } else {
+                                    if (data.quantity !== undefined) {
+                                        qtySpan.textContent = data.quantity;
+                                    }
+                                    if (data.itemTotal !== undefined) {
+                                        itemTotalEl.textContent = money(data.itemTotal);
+                                    }
+                                }
+                                // update summary values (always present)
+                                if (data.subtotal !== undefined) subtotalEl.textContent = money(data.subtotal);
+                                if (data.total !== undefined) totalEl.textContent = money(data.total);
+                            };
+
+                            // Generic fetch helper
+                            const fetchAndApply = async (url) => {
+                                try {
+                                    const resp = await fetch(url, { method: 'GET', credentials: 'same-origin' });
+                                    if (!resp.ok) {
+                                        const text = await resp.text();
+                                        throw new Error('Server error: ' + (text || resp.status));
+                                    }
+                                    const data = await resp.json();
+                                    if (data.success) {
+                                        applyServerValues(data);
+                                    } else {
+                                        alert(data.message || 'Could not update cart');
+                                    }
+                                } catch (err) {
+                                    console.error(err);
+                                    alert('Something went wrong while updating the cart.');
+                                }
+                            };
+
+                            // increase
+                            if (incBtn) {
+                                incBtn.addEventListener('click', (e) => {
+                                    e.preventDefault();
+                                    fetchAndApply('/cart/increase/' + productId);
+                                });
+                            }
+
+                            // decrease
+                            if (decBtn) {
+                                decBtn.addEventListener('click', (e) => {
+                                    e.preventDefault();
+                                    fetchAndApply('/cart/decrease/' + productId);
+                                });
+                            }
+                        });
+                    })();
+
+                </script>
+
+</body>
+
+</html>

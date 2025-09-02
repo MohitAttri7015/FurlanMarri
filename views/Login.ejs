@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="/stylesheets/login.css">
+    <link rel="stylesheet" href="/stylesheets/nav.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
+</head>
+<body>
+
+    
+    <%- include('partials/error') %>
+
+    
+    <%- include('partials/header') %>
+
+    <div id="login">
+        <div class="login-wrapper">
+            <!-- Left Image -->
+            <div class="login-left">
+                <video autoplay muted loop id="login-video">
+                    <source src="/assests/For-login.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <!-- Right Form -->
+            <div class="login-form">
+            
+            <a href="/" class="go-home"><i class="ri-arrow-left-line"></i></a>
+
+            <span class="sign-up-heading">Log in</span>
+            <p>Don't have an account? <a href="/users/SignUp">Create an Account</a></p>
+
+            <!-- ✅ Real Form -->
+            <form action="/users/login" method="POST">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <a href="/users/forgotPassword">Forgot Password ?</a>
+                </div>
+
+                
+
+                <button type="submit" class="login-btn slide">
+                    <span class="text-top">Login</span>
+                    <span class="text-bottom">Login</span>
+                </button>
+                <div class="terms">
+                    <input type="checkbox" name="terms" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms & Condition</a></label>
+                </div>
+            </form>
+
+            <p style="text-align:center; margin:10px 0;" class="or">or</p>
+
+            <div class="social-login">
+                <a href="" class="slide">
+                    <span class="text-top"><img src="/assests/google.png" alt=""> Continue with Google</span>
+                    <span class="text-bottom"><img src="/assests/google.png" alt=""> Continue with Google</span>
+                </a>
+                <a href="" class="slide">
+                    <span class="text-top"><img src="/assests/facebook.png" alt=""> Continue with Facebook</span>
+                    <span class="text-bottom"><img src="/assests/facebook.png" alt=""> Continue with Facebook</span>
+                </a>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="/javascripts/nav.js"></script>
+</body>
+</html>

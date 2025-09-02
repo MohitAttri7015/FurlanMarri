@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/stylesheets/contactUs.css">
+    <link rel="stylesheet" href="/stylesheets/nav.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
+
+</head>
+
+<body>
+    <%- include('partials/header') %>
+
+        <div id="contactBanner" class="contact-banner">
+            <div class="contactContnet">
+                <span>CONTACT US</span>
+                <p>How can we help you ?</p>
+            </div>
+        </div>
+
+        <section id="contact-us">
+            <!-- Left Side Info -->
+            <div class="contact-info">
+                <span>Email</span>
+                <p>Monday - Friday<br>9:00 am - 6:00 pm</p>
+                <p>Support and questions <a href="mailto:support@furlanmarri.com">support@furlanmarri.com</a></p>
+                <p>Media and press <a href="mailto:media@furlanmarri.com">media@furlanmarri.com</a></p>
+                <hr>
+
+                <span>Phone</span>
+                <p>Monday - Friday<br>9:00 am - 6:00 pm</p>
+                <p>Support and after sales service +41 22 567 07 57</p>
+                <p>Showroom in Geneva +41 22 300 50 51</p>
+                <hr>
+
+                <span>Showroom</span>
+                <p>Furlan Marri SA<br>
+                    Rue du Nant 25<br>
+                    1207 Geneva<br>
+                    Switzerland</p>
+                <p>By appointments only, please contact us in advance.</p>
+            </div>
+
+            <!-- Right Side Form -->
+            <div class="contact-form">
+                <div class="tabs">
+                    <button>Have a Question ?</button>
+                </div>
+                <form>
+                    <div>
+                        <label>First and Last Name *</label>
+                        <input type="text" placeholder="FULL NAME">
+                    </div>
+                    <div>
+                        <label>Email *</label>
+                        <input type="email" placeholder="EMAIL@EXAMPLE.COM">
+                    </div>
+                    <div>
+                        <label>Phone Number</label>
+                        <input type="text" placeholder="+1 (555) 555-1234">
+                    </div>
+                    <div>
+                        <label>Message *</label>
+                        <textarea placeholder="Type your message here"></textarea>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="consent">
+                        <label for="consent">
+                            For the purpose of my personal request via the form, I agree to the use of my data to
+                            contact me again.
+                            Your information will in no case be kept for commercial purposes.
+                            To find out more about your rights, please consult our Personal data protection policy.
+                        </label>
+                    </div>
+                    <button type="submit" class="submit">SEND MY MESSAGE</button>
+                </form>
+            </div>
+        </section>
+
+
+        <%- include('partials/footer') %>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+            <script src="/javascripts/nav.js"></script>
+</body>
+
+</html>

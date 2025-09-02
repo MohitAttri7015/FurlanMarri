@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Watches</title>
+    <link rel="stylesheet" href="/stylesheets/CornesDeVache.css">
+    <link rel="stylesheet" href="/stylesheets/collectionWatches.css">
+    <link rel="stylesheet" href="/stylesheets/nav.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
+</head>
+
+<body>
+
+
+    <%- include('partials/header') %>
+        <div id="collectionWatchesBanner" class="CornesDeVache-banner">
+            <div class="collectionWatchesContnet">
+                <span>COLLECTION</span>
+                <p>CORNES DE VACHE</p>
+            </div>
+        </div>
+
+        <div id="collectionWatches">
+            <p class="collectionWatches-title">CORNES DE VACHE</p>
+            <div class="collectionWatcheswrapper">
+                <% CornesDeVaches.forEach(function(CornesDeVache){ %>
+                    <div class="item">
+                        <a href="/products/productDetail/<%= CornesDeVache._id %>">
+                            <div class="image">
+                                <img src="/uploads/<%= CornesDeVache.mainImage %>" alt="" class="main-item-image">
+                                <img src="/uploads/<%= CornesDeVache.zoomImage %>" alt="" class="zoom-item-image">
+                            </div>
+                        </a>
+                        <div class="itme-con">
+                            <span class="item-name">
+                                <%= CornesDeVache.name %>
+                            </span>
+                            <span class="item-price">USD <%= CornesDeVache.price %></span>
+                            <a href="/products/productDetail/<%= CornesDeVache._id %>">
+                                DISCOVER <i class="ri-arrow-right-s-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+
+
+        <div id="MOVEMENT">
+            <div class="MOVEMENT-section">
+                <div class="MOVEMENT-image">
+                    <img src="/assests/Cornes-de-vache-img-2.jfif" alt="MOVEMENT">
+                </div>
+                <div class="MOVEMENT-text">
+                    <span class="head-1">A swiss automatic movement</span>
+                    <span class="head-2">68-hour power reserve. Reliable and Precise.</span>
+                    <div class="MOVEMENT-p-wrapper">
+                        <p>
+                            The movement is a self-winding mechanism produced and assembled by La Joux-Perret, La
+                            Chaux-de-Fonds, Switzerland. It incorporates a 68-hour power reserve, while a full tungsten
+                            rotor with palladium coating ensures smooth rotation and weight distribution. The movement
+                            have a high end finish with heated blue screws. Côtes de Genève and snailing on the rotor,
+                            engraved with the words “Furlan Marri, crafted with care, designed for details”.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('partials/footer') %>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+            <script src="/javascripts/nav.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <link rel="stylesheet" href="/stylesheets/services.css">
+    <link rel="stylesheet" href="/stylesheets/nav.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
+</head>
+
+<body>
+    <%- include('partials/header') %>
+
+        <div id="ServicesBanner">
+            <div class="ServicesBannerContnet">
+                <span>FURLAN MARRI X HOROLOGIUM</span>
+                <p>AFTER SALES SERVICE</p>
+            </div>
+        </div>
+
+        <div id="serviceMOVEMENT">
+            <div class="serviceMOVEMENT-section">
+                <div class="serviceMOVEMENT-image">
+                    <img src="/assests/service-img-2.jfif" alt="MOVEMENT">
+                </div>
+                <div class="serviceMOVEMENT-text">
+                    <span class="head-1">A great partnership with Horologium</span>
+                    <span class="head-2">Worldwide after sales service in more than 35 countries.</span>
+                    <div class="serviceMOVEMENT-p-wrapper">
+                        <p>
+                            Thanks to a great partnership with Horologium since the beginning of the brand, Furlan Marri
+                            is able to provide a worldwide aftersales service. Established in 2020, Horologium is a
+                            UK-based workshop founded by Raphael Pfund and Raquel Palmieri
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-part-2">
+            <div class="service-part-2-wrapper">
+                <span>CONTACT US</span>
+                <p>NEED HELP WITH YOUR WATCH ?</p>
+                <a href="/contactUs">ASK FOR REPAIR <i class="ri-arrow-right-s-fill"></i></a>
+            </div>
+            <div class="video-container">
+                <video id="partnershipVideo" class="service-video">
+                    <source src="/assests/Service-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-overlay">
+                    <p id="video-overlay-p">How did the partnership begin ?</p>
+                    <button id="playVideoBtn" class="to-play"> <i class="ri-arrow-right-s-fill"></i> PLAY VIDEO</button>
+                </div>
+            </div>
+        </div>
+
+
+        <%- include('partials/footer') %>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+        <script src="/javascripts/nav.js"></script>
+        <script>
+            const video = document.getElementById("partnershipVideo");
+            const playBtn = document.getElementById("playVideoBtn");
+            const p = document.getElementById("video-overlay-p");
+            playBtn.addEventListener("click", () => {
+                if (video.paused) {
+                    video.play();
+                    p.style.display = "none";
+                    playBtn.innerHTML = `<i class="ri-pause-fill"></i> PAUSE`;
+                } else {
+                    video.pause();
+                    p.style.display = "block";
+                    playBtn.innerHTML = `<i class="ri-play-fill"></i> PLAY VIDEO`;
+                }
+            });
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Product Creation</title>
+
+  <style>
+    /* ===========================
+        General Form Styles
+    ============================ */
+    body {
+      background-color: #f2f4f8;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #product-creation {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    #product-creation h2 {
+      margin: 30px 0 15px;
+      font-size: 22px;
+      color: #2c3e50;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    textarea {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+      transition: border 0.3s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #007BFF;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    /* Designed For / Gallery Details Blocks */
+    .detail,
+    .gallery-input {
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .detail button,
+    .gallery-input button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #dc3545;
+    }
+
+    .detail button:hover,
+    .gallery-input button:hover {
+      background-color: #b52a3a;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 10px 0 0;
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      #product-creation {
+        padding: 20px;
+      }
+
+      #product-creation h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <form action="/owners/createProducts" id="product-creation" method="POST" enctype="multipart/form-data">
+    <!-- ===========================
+        Basic Info
+    ============================ -->
+    <h2>Basic Info</h2>
+    <input type="text" name="name" placeholder="Product Name" required>
+    <input type="text" name="nameDesc" placeholder="Name Description" required>
+    <input type="text" name="category" placeholder="Category" required>
+    <input type="text" name="price" placeholder="Price" required>
+
+    <!-- ===========================
+        Main Images
+    ============================ -->
+    <h2>Main Image</h2>
+    <input type="file" name="mainImage" required>
+    <h2>Full Image (optional)</h2>
+    <input type="file" name="fullImage">
+    <h2>Zoom Image</h2>
+    <input type="file" name="zoomImage" required>
+    <h2>Best Seller Image (optional)</h2>
+    <input type="file" name="bestSellers">
+    <h2>Watch Video (optional)</h2>
+    <input type="file" name="watchVideos" id="watchVideo">
+
+    <!-- ===========================
+        Gallery Images
+    ============================ -->
+    <h2>Gallery Images</h2>
+    <div id="gallery-container"></div>
+    <button type="button" id="add-gallery-btn">+ Add Gallery Image</button>
+    <input type="hidden" name="GalleryArray" id="galleryArrayInput">
+
+    <!-- ===========================
+        Case Details
+    ============================ -->
+    <h2>Case Details</h2>
+    <input type="text" name="caseSize" placeholder="Case Size">
+    <input type="text" name="material" placeholder="Material">
+    <input type="text" name="dimensions1" placeholder="Dimension 1">
+    <input type="text" name="dimensions2" placeholder="Dimension 2">
+    <input type="text" name="finishers" placeholder="Finishers">
+    <input type="text" name="detail1" placeholder="Detail1">
+    <input type="text" name="detail2" placeholder="Detail2">
+    <input type="text" name="waterResistance" placeholder="Water Resistance">
+    <input type="text" name="glass" placeholder="Glass">
+
+    <!-- ===========================
+        Strap Details
+    ============================ -->
+    <h2>Strap Details</h2>
+    <input type="text" name="strapName" placeholder="Strap Name">
+    <input type="text" name="strap1" placeholder="Strap 1">
+    <input type="text" name="strap2" placeholder="Strap 2">
+    <input type="text" name="quickReleaseSystem" placeholder="Quick Release System">
+    <input type="text" name="size" placeholder="Size">
+    <input type="text" name="buckles" placeholder="Buckles">
+
+    <!-- ===========================
+        Designed For Details
+    ============================ -->
+    <h2>Designed For Details</h2>
+    <div id="designedForContainer"></div>
+    <button type="button" id="add-detail-btn">+ Add Detail</button>
+    <input type="hidden" name="designedForDetails" id="designedForInput">
+
+    <!-- ===========================
+        Submit Button
+    ============================ -->
+    <button type="submit">Create Product</button>
+  </form>
+
+  <script>
+    // --------------------------- Designed For Details ---------------------------
+    const designedForDetails = [];
+    const designedForContainer = document.getElementById('designedForContainer');
+    const designedForInput = document.getElementById('designedForInput');
+    const addDetailBtn = document.getElementById('add-detail-btn');
+
+    addDetailBtn.addEventListener('click', () => {
+      const detail = { name: '', value: '', desc: '' };
+      designedForDetails.push(detail);
+      renderDesignedFor();
+    });
+
+    function renderDesignedFor() {
+      designedForContainer.innerHTML = '';
+      designedForDetails.forEach((detail, index) => {
+        const div = document.createElement('div');
+        div.classList.add('detail');
+        div.innerHTML = `
+          <input type="file" name="designImage" required>
+          <input type="text" placeholder="Name" name="designName">
+          <input type="text" placeholder="Value" name="designValue">
+          <textarea placeholder="Description" name="designDesc"></textarea>
+          <button type="button">Remove</button>
+          <hr>
+        `;
+        div.querySelector('button').addEventListener('click', () => {
+          designedForDetails.splice(index, 1);
+          renderDesignedFor();
+        });
+
+
+        const inputs = div.querySelectorAll('input[type="text"], textarea');
+        inputs[0].addEventListener('input', e => detail.designName = e.target.value);
+        inputs[1].addEventListener('input', e => detail.designValue = e.target.value);
+        inputs[2].addEventListener('input', e => detail.designDesc = e.target.value);
+          
+        designedForContainer.appendChild(div);
+      });
+    }
+
+    // --------------------------- Gallery ---------------------------
+    const galleryContainer = document.getElementById('gallery-container');
+    const addGalleryBtn = document.getElementById('add-gallery-btn');
+
+    addGalleryBtn.addEventListener('click', () => {
+      const div = document.createElement('div');
+      div.classList.add('gallery-input');
+      div.innerHTML = `
+    <input type="file" name="Gallery" required>
+    <button type="button">Remove</button>
+  `;
+      div.querySelector('button').addEventListener('click', () => {
+        div.remove();
+      });
+      galleryContainer.appendChild(div);
+    });
+
+    // --------------------------- Form Submit ---------------------------
+    document.querySelector('form').addEventListener('submit', () => {
+      designedForInput.value = JSON.stringify(designedForDetails);
+    });
+
+  </script>
+</body>
+
+</html>

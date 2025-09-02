@@ -1,0 +1,188 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: lighter;
+}
+
+p,
+span,
+a {
+    font-family: Henderson Sans Basic Light;
+    font-weight: bolder;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+
+body {
+    overflow-x: hidden;
+}
+
+
+#allCollectionBanner {
+    width: 100%;
+    height: 80vh;
+    background-image: url('/assests/allCollectionBanner.jfif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    background-position: center;
+}
+
+
+#allCollectionBanner::before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(180deg, #1a232e33, #1a232e00 52.06%, #1a232e33), linear-gradient(#28252b80, #28252b80);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+
+#allCollectionBanner .allCollectionBannerContnet {
+    color: white;
+    z-index: 2;
+    position: relative;
+    max-width: 1300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: end;
+    padding: 5rem 1rem;
+    margin: auto;
+}
+
+
+#allCollectionBanner .allCollectionBannerContnet span {
+    font-size: 0.8rem;
+}
+
+#allCollectionBanner .allCollectionBannerContnet p {
+    font-size: 2rem;
+}
+
+
+#allCollection {
+    width: 100%;
+    background-color: #F6F6F6;
+    padding: 5rem 3rem;
+}
+
+#allCollection .allCollection-title {
+    font-size: 0.8rem;
+    background-color: black;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    margin-bottom: 5rem;
+    width: fit-content;
+}
+
+
+
+
+.collections {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 items per row */
+    padding: 20px;
+    gap: 3rem;
+    justify-items: center;
+    margin: auto;
+    max-width: 1200px;
+}
+
+.collection-item {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    cursor: pointer;
+}
+
+.collection-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.collection-item span {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    position: relative;
+    width: fit-content;
+    padding-bottom: 10px;
+}
+
+.collection-item span::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: black;
+    transition: all 0.4s;
+}
+
+.collection-item:hover.collection-item span::before {
+    width: 100%;
+    left: 0;
+}
+
+
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 768px) {
+    .collections {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 550px) {
+    .collection {
+        gap: 0;
+    }
+
+    .collection-item span {
+        font-size: 1.2rem;
+    }
+
+    #allCollection {
+        padding: 5rem 1rem;
+    }
+
+    .collection-item{
+        margin-bottom: 0;
+    }
+}
+
+
+@media (max-width: 350px) {
+    .collection-item span {
+        font-size: 1.2rem;
+    }
+}
