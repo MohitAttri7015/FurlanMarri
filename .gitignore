@@ -1,0 +1,14 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables (hide secrets)
+.env
+
+# Logs
+*.log
+
+# MacOS system files
+.DS_Store
+
+# Optional: npm debug files
+npm-debug.log*
