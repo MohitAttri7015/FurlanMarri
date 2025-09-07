@@ -107,7 +107,6 @@ module.exports.logout = async (req, res) => {
 
 module.exports.forgotPassword = async (req, res) => {
     try {
-        
         const { email } = req.body;
         let user = await userModel.findOne({ email });
         if (!user) return req.flash('error_msg', '❌ email not found');

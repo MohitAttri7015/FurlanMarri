@@ -1,4 +1,4 @@
-nav{
+nav {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,94 +8,94 @@ nav{
     transition: all 1s ease;
 }
 
-nav.change{
+nav.change {
     background-color: white;
 }
 
-nav #menuLink.changebg{
+nav #menuLink.changebg {
     background-color: black !important;
     color: white !important;
 }
 
-nav .nav-links.changClr{
+nav .nav-links.changClr {
     color: black !important;
 }
 
-nav .nav-links.changClr::before{
+nav .nav-links.changClr::before {
     background-color: black !important;
     height: 2px;
 }
 
 nav .menu,
-nav .quote{
+nav .quote {
     background-color: white !important;
     color: black !important;
     padding: 8px 20px !important;
     border-radius: 8px !important;
 }
 
-nav .quote{
+nav .quote {
     background-color: transparent !important;
     color: white !important;
 }
 
-nav .nav-links{
+nav .nav-links {
     text-decoration: none;
     font-size: 12px;
     color: white;
 }
 
 .slide {
-      position: relative;
-      display: inline-block;
-      overflow: hidden;
-      cursor: pointer;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .slide span {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: transform 0.4s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.4s ease;
 }
 
 .slide .text-top {
-      transform: translateY(0);
+    transform: translateY(0);
 }
 
 .slide .text-bottom {
-      position: absolute;
-      top: 100%;
+    position: absolute;
+    top: 100%;
 }
 
 .slide:hover .text-top {
-      transform: translateY(-200%);
+    transform: translateY(-200%);
 }
 
 .slide:hover .text-bottom {
-      transform: translateY(-150%);
-      transition: transform 0.4s ease;
+    transform: translateY(-150%);
+    transition: transform 0.4s ease;
 }
-  
-nav .nav-wrapper{
+
+nav .nav-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 40px 50px;
 }
 
-nav .nav-part{
+nav .nav-part {
     display: flex;
     align-items: center;
     gap: 30px;
 }
 
-nav .bottom-arrow{
+nav .bottom-arrow {
     position: relative;
     padding-bottom: 5px;
 }
 
-nav .bottom-arrow::before{
+nav .bottom-arrow::before {
     content: '';
     position: absolute;
     bottom: 0;
@@ -106,23 +106,23 @@ nav .bottom-arrow::before{
     transition: all 0.3s ease;
 }
 
-nav .bottom-arrow:hover::before{
+nav .bottom-arrow:hover::before {
     width: 100%;
     left: 0;
 }
 
-nav .logo{
+nav .logo {
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
     letter-spacing: 1px;
 }
 
-nav .logo.changeClr{
+nav .logo.changeClr {
     color: black !important;
 }
 
-nav .nav-right{
+nav .nav-right {
     position: relative;
 }
 
@@ -145,7 +145,7 @@ nav .menu-btn .line {
     transition: all 0.3s ease;
 }
 
-nav .menu-btn .line.changeLine{
+nav .menu-btn .line.changeLine {
     background-color: black !important;
 }
 
@@ -194,7 +194,7 @@ nav #nav-dropdown a {
 }
 
 
-nav #nav-dropdown a::before{
+nav #nav-dropdown a::before {
     content: '';
     position: absolute;
     bottom: 0;
@@ -204,25 +204,25 @@ nav #nav-dropdown a::before{
     background-color: #DADADA;
 }
 
-nav #nav-dropdown a::after{
+nav #nav-dropdown a::after {
     content: '';
     position: absolute;
     bottom: 0;
     right: 0;
     width: 0;
     height: 1.5px;
-    background-color:black;
+    background-color: black;
     transition: all 0.3s ease;
 }
 
 
-nav #nav-dropdown a:hover::after{
+nav #nav-dropdown a:hover::after {
     width: 100%;
     left: 0;
 }
 
 
-nav .nav-dropdown-wrapper{
+nav .nav-dropdown-wrapper {
     max-width: 1200px;
     height: 100%;
     display: flex;
@@ -231,7 +231,7 @@ nav .nav-dropdown-wrapper{
     padding: 20px;
 }
 
-nav .dropdown-section{
+nav .dropdown-section {
     height: 100%;
     width: 100%;
     display: flex;
@@ -239,7 +239,7 @@ nav .dropdown-section{
 }
 
 
-nav .dropdown-link-wrapper{
+nav .dropdown-link-wrapper {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -248,12 +248,12 @@ nav .dropdown-link-wrapper{
     padding: 10px 0;
 }
 
-nav .dropdown-img{
+nav .dropdown-img {
     height: 100%;
     position: relative;
 }
 
-nav .dropdown-img img{
+nav .dropdown-img img {
     width: 100%;
     height: 0;
     object-fit: cover;
@@ -262,18 +262,25 @@ nav .dropdown-img img{
 
 
 nav .dropdown-img img.animate-img {
-  height: 100%;       
+    height: 100%;
+}
+
+.small-screen-add {
+    display: none;
+    font-size: 2rem;
 }
 
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 1280px) {
-    .disappear{
+    .disappear {
         display: none !important;
     }
 
-    nav .menu-btn{
+    nav .menu-btn {
         display: block;
+        position: relative;
+        top: 0;
     }
 }
 
@@ -297,16 +304,30 @@ nav .dropdown-img img.animate-img {
 
 
 @media (max-width: 560px) {
-    nav .dropdown-link-wrapper{
+
+    nav .dropdown-link-wrapper {
         margin-top: 2rem;
         justify-content: start
+    }
+
+    nav .nav-wrapper {
+        padding: 45px 15px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+    .small-screen-add {
+        display: block;
+    }
+
+    .big-screen-add{
+        display: none;
     }
 }
 
 @media (max-width: 440px) {
-    nav .nav-wrapper {
-        padding: 45px 15px;
-    }
 
     nav #nav-dropdown {
         padding: 0
@@ -323,8 +344,7 @@ nav .dropdown-img img.animate-img {
         width: 95%;
     }
 
-    nav #nav-dropdown a
-    {
+    nav #nav-dropdown a {
         font-size: 1.4rem;
         gap: 0rem;
     }

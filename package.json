@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mohit Attri",
   "license": "ISC",
@@ -15,7 +14,7 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.7",
     "debug": "^4.4.1",
-    "dotenv": "^17.2.1",
+    "dotenv": "^17.2.2",
     "ejs": "^3.1.10",
     "env": "^0.0.2",
     "express": "^5.1.0",

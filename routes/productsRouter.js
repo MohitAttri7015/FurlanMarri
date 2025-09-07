@@ -27,7 +27,7 @@ router.get('/productDetail/:id', async (req, res) => {
 
 
 router.get('/allWatches', async (req, res) => {
-     try {
+    try {
 
         const allProducts = await productModel.find();
 

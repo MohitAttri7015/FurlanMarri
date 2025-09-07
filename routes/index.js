@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     const loggedIn = req.cookies.loggedIn === 'true';
     const isOwner = req.cookies.isOwner === 'true';
 
-    let fiveProducts = await productModel.find().limit(5);
+    let fiveProducts = await productModel.find().sort({_id: -1}).limit(5); // newest five product
 
 
 
@@ -162,7 +162,7 @@ router.get('/cart/decrease/:productId', loggedIn, async (req, res) => {
       user.cart[idx].quantity = user.cart[idx].quantity - 1;
       await user.save();
     }
-    // ❌ else do nothing (keep it at 1)
+
 
     const item = user.cart[idx];
     const itemTotal = item.price * item.quantity;
@@ -198,6 +198,19 @@ router.get("/services", (req, res) => {
     res.render("Services");
 })
 
+
+
+router.get('/removeItem/:id', async (req, res) => {
+  try {
+    await productModel.findByIdAndDelete(req.params.id);
+    req.flash('success_msg', '✅ Item removed.');
+    res.redirect('/');   
+} catch (err) { 
+    req.flash('error_msg', '⚠️ Erro while removing item.');
+    console.error(err);
+    res.redirect('/');   
+  }
+});
 
 
 module.exports = router;

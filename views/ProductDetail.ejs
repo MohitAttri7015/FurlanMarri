@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Detail</title>
-    <link rel="stylesheet" href="/stylesheets/ProductDetail.css">
-    <link rel="stylesheet" href="/stylesheets/nav.css">
-    <link rel="stylesheet" href="/stylesheets/footer.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Product Detail</title>
+        <link rel="stylesheet" href="/stylesheets/ProductDetail.css">
+        <link rel="stylesheet" href="/stylesheets/nav.css">
+        <link rel="stylesheet" href="/stylesheets/footer.css">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
+    </head>
 
-<body>
+    <body>
 
-    <%- include('partials/error') %>
+        <%- include('partials/error') %>
 
-
-    <%- include('partials/header') %>
+        <%- include('partials/header') %>
 
         <div class="product-container">
             <div class="product-wrapper">
                 <!-- Left Side -->
                 <div class="product-image">
-                    <img src="/uploads/<%= selectedProduct.mainImage %>" alt="White Sector Watch">
+                    <img src="/uploads/<%= selectedProduct.mainImage %>"
+                        alt="White Sector Watch">
                 </div>
 
                 <!-- Right Side -->
@@ -46,10 +48,19 @@
                     <p>USD <%= selectedProduct.price %>
                     </p>
                 </div>
-                <a href="/addtoCart/<%= selectedProduct._id %>" class="add-cart">ADD TO CART</a>
+                <% if(isOwner) { %>
+                <a href="/removeItem/<%= selectedProduct._id %>"
+                    onclick="return confirm('Are you sure you want to delete this product?');"
+                    class="add-cart">
+                    REMOVE ITEM
+                </a>
+
+                <% } else { %>
+                <a href="/addtoCart/<%= selectedProduct._id %>"
+                    class="add-cart">ADD TO CART</a>
+                <% } %>
             </div>
         </div>
-
 
         <div id="productGallery">
             <div class="productGallery-head">
@@ -73,20 +84,25 @@
             </div>
             <div class="swiper mySwiper3">
                 <div class="swiper-wrapper">
-                    <% if (selectedProduct.Gallery && selectedProduct.Gallery.length> 0) { %>
-                        <% selectedProduct.Gallery.forEach(function(img){ %>
-                            <div class="swiper-slide">
-                                <img src="/uploads/<%= img %>" class="watch-image" alt="watch">
-                                <i class="ri-add-line see-picture"></i>
-                            </div>
-                            <% }) %>
-                                <% } %>
+                    <% if (selectedProduct.Gallery &&
+                    selectedProduct.Gallery.length> 0) { %>
+                    <% selectedProduct.Gallery.forEach(function(img){ %>
+                    <div class="swiper-slide">
+                        <img src="/uploads/<%= img %>" class="watch-image"
+                            alt="watch">
+                        <i class="ri-add-line see-picture"></i>
+                    </div>
+                    <% }) %>
+                    <% } %>
 
                 </div>
             </div>
         </div>
 
-
+        <% if(selectedProduct.fullImage.length> 0) { %>
+        <div class="fullImage"
+            style="background-image: url('/uploads/<%= selectedProduct.fullImage %>')"></div>
+        <% } %>
 
         <section id="specification">
             <p class="title">SPECIFICATIONS</p>
@@ -113,10 +129,10 @@
                             </span></p>
 
                         <% if(selectedProduct.case.glass.length> 0){ %>
-                            <p>Glass<br><span>
-                                    <%= selectedProduct.case.glass %>
-                                </span></p>
-                            <% } %>
+                        <p>Glass<br><span>
+                                <%= selectedProduct.case.glass %>
+                            </span></p>
+                        <% } %>
                     </div>
 
                     <div class="spec-col">
@@ -143,78 +159,83 @@
 
                 <!-- Right Column -->
                 <div class="spec-image">
-                    <img src="/uploads/<%= selectedProduct.mainImage %>" alt="Watch">
+                    <img src="/uploads/<%= selectedProduct.mainImage %>"
+                        alt="Watch">
                 </div>
             </div>
         </section>
 
-
         <% if (selectedProduct.watchVideos.length> 0) { %>
-            <div class="video-container" id="video-container">
-                <video id="product-video" preload="metadata" autoplay muted playsinline loop>
-                    <source src="/uploads/<%= selectedProduct.watchVideos %>" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            <% } else if (selectedProduct.category==="DISCO VOLANTE" ) {%>
-                <div class="video-container" id="video-container">
-                    <video id="product-video" preload="metadata" autoplay muted playsinline loop>
-                        <source src="/uploads/desco-verde-veadio.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
+        <div class="video-container" id="video-container">
+            <video id="product-video" preload="metadata" autoplay muted
+                playsinline loop>
+                <source src="/uploads/<%= selectedProduct.watchVideos %>"
+                    type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <% } else if (selectedProduct.category==="DISCO VOLANTE" ) {%>
+        <div class="video-container" id="video-container">
+            <video id="product-video" preload="metadata" autoplay muted
+                playsinline loop>
+                <source src="/uploads/desco-verde-veadio.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <% } %>
 
-
-
         <div id="productDesign">
-                            <div class="productDesign-head">
-                                <h2 style="opacity: 0;">hello</h2>
-                                <div class="head-wrap">
-                                    <span>NO MATTER WHAT</span>
-                                    <p class="prd-ctgry">
-                                        DESIGN FOR DETAILS
-                                    </p>
-                                </div>
-                                <div class="slider-btn">
-                                    <div class="slide-i prev-btn-4">
-                                        <i class="ri-arrow-left-s-fill i-top"></i>
-                                        <i class="ri-arrow-left-s-fill i-bottom"></i>
-                                    </div>
-                                    <div class="slide-i next-btn-4">
-                                        <i class="ri-arrow-right-s-fill i-top"></i>
-                                        <i class="ri-arrow-right-s-fill i-bottom"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper mySwiper4">
-                                <div class="swiper-wrapper">
-                                    <% if (selectedProduct.designedForDetails && selectedProduct.designedForDetails.length>
-                                        0) { %>
-                                        <% selectedProduct.designedForDetails.forEach(function(detail){ %>
-                                            <div class="swiper-slide">
-                                                <img src="/uploads/<%= detail.designImage %>" class="watch-image"
-                                                    alt="watch">
-                                                <div class="design-info">
-                                                    <span class="designName">
-                                                        <%= detail.designName %>
-                                                    </span>
-                                                    <p class="designValue">
-                                                        <%= detail.designValue %>
-                                                    </p>
-                                                    <p class="design-desc" style="display: none;">
-                                                        <%= detail.designDesc %>
-                                                    </p>
-                                                    <i class="ri-add-line see-detail"><span>LEARN MORE</span></i>
-                                                </div>
-                                            </div>
-                                            <% }) %>
-                                                <% } %>
+            <div class="productDesign-head">
+                <h2 style="opacity: 0;">hello</h2>
+                <div class="head-wrap">
+                    <span>NO MATTER WHAT</span>
+                    <p class="prd-ctgry">
+                        DESIGN FOR DETAILS
+                    </p>
+                </div>
+                <div class="slider-btn">
+                    <div class="slide-i prev-btn-4">
+                        <i class="ri-arrow-left-s-fill i-top"></i>
+                        <i class="ri-arrow-left-s-fill i-bottom"></i>
+                    </div>
+                    <div class="slide-i next-btn-4">
+                        <i class="ri-arrow-right-s-fill i-top"></i>
+                        <i class="ri-arrow-right-s-fill i-bottom"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper mySwiper4">
+                <div class="swiper-wrapper">
+                    <% if (selectedProduct.designedForDetails &&
+                    selectedProduct.designedForDetails.length>
+                    0) { %>
+                    <%
+                    selectedProduct.designedForDetails.forEach(function(detail){
+                    %>
+                    <div class="swiper-slide">
+                        <img src="/uploads/<%= detail.designImage %>"
+                            class="watch-image"
+                            alt="watch">
+                        <div class="design-info">
+                            <span class="designName">
+                                <%= detail.designName %>
+                            </span>
+                            <p class="designValue">
+                                <%= detail.designValue %>
+                            </p>
+                            <p class="design-desc" style="display: none;">
+                                <%= detail.designDesc %>
+                            </p>
+                            <i class="ri-add-line see-detail"><span>LEARN
+                                    MORE</span></i>
+                        </div>
+                    </div>
+                    <% }) %>
+                    <% } %>
 
-                                </div>
-                            </div>
+                </div>
+            </div>
         </div>
-
 
         <div id="packaging">
             <div class="packaging-section">
@@ -225,68 +246,82 @@
                     <span class="head-1">PACKAGING</span>
                     <span class="head-2">A PACKAGING FULL OF STORIES</span>
                     <div class="pkg-p-wrapper">
-                         <p>
-                            Inspired by the travel cases from the 40's, simply sophisticated and refined, our packaging is crafted with
-                            attention to details to guarantee great robustness. It includes warranty and certificates papers, a micro-fiber
-                            cloth and a secondary strap. Everything has been designed to follow you through your adventures and protect your
-                            watch. Our story inspired us in the making. Now it's time to write your own.
+                        <p>
+                            Inspired by the travel cases from the 40's, simply
+                            sophisticated and refined, our packaging is crafted
+                            with
+                            attention to details to guarantee great robustness.
+                            It includes warranty and certificates papers, a
+                            micro-fiber
+                            cloth and a secondary strap. Everything has been
+                            designed to follow you through your adventures and
+                            protect your
+                            watch. Our story inspired us in the making. Now it's
+                            time to write your own.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
 
-
-
         <div id="you-may-like">
             <p class="you-may-like-title">YOU MAY ALSO LIKE</p>
             <div class="you-may-like-wrapper">
                 <% randomTwoProducts.forEach(function(randomTwoProduct){ %>
-                    <div class="item">
-                        <a href="/products/productDetail/<%= randomTwoProduct._id %>">
-                            <div class="image">
-                                <img src="/uploads/<%= randomTwoProduct.mainImage %>" alt="" class="main-item-image">
-                                <img src="/uploads/<%= randomTwoProduct.zoomImage %>" alt="" class="zoom-item-image">
-                            </div>
-                        </a>
-                        <div class="itme-con">
-                            <span class="item-name"><%= randomTwoProduct.name %></span>
-                            <span class="item-price">USD <%= randomTwoProduct.price %></span>
-                            <a href="/products/productDetail/<%= randomTwoProduct._id %>">
-                                DISCOVER <i class="ri-arrow-right-s-fill"></i>
-                            </a>
+                <div class="item">
+                    <a
+                        href="/products/productDetail/<%= randomTwoProduct._id %>">
+                        <div class="image">
+                            <img
+                                src="/uploads/<%= randomTwoProduct.mainImage %>"
+                                alt class="main-item-image">
+                            <img
+                                src="/uploads/<%= randomTwoProduct.zoomImage %>"
+                                alt class="zoom-item-image">
                         </div>
+                    </a>
+                    <div class="itme-con">
+                        <span class="item-name"><%= randomTwoProduct.name
+                            %></span>
+                        <span class="item-price">USD <%= randomTwoProduct.price
+                            %></span>
+                        <a
+                            href="/products/productDetail/<%= randomTwoProduct._id %>">
+                            DISCOVER <i class="ri-arrow-right-s-fill"></i>
+                        </a>
                     </div>
-               <% }) %>
+                </div>
+                <% }) %>
             </div>
         </div>
 
-
         <!-- Popup Overlay -->
         <div id="imagePopup" class="image-popup">
-            <span class="close-popup"><i class="ri-arrow-go-back-fill"></i></span>
-            <img id="popupImg" src="" alt="Expanded Image">
+            <span class="close-popup"><i
+                    class="ri-arrow-go-back-fill"></i></span>
+            <img id="popupImg" src alt="Expanded Image">
         </div>
 
-    <%- include('partials/footer') %>
+        <%- include('partials/footer') %>
 
-
-
-    <!-- Sidebar -->
-    <div id="designSidebar" class="sidebar">
-        <button class="design-side-bar-close-btn"><i class="ri-arrow-go-back-fill"></i></button>
-        <div class="sidebar-content">
-            <img id="sidebarImage" src="" alt="Design Image">
-            <p id="sidebarName"></p>
-            <p id="sidebarValue"></p>
-            <p id="sidebarDesc"></p>
+        <!-- Sidebar -->
+        <div id="designSidebar" class="sidebar">
+            <button class="design-side-bar-close-btn"><i
+                    class="ri-arrow-go-back-fill"></i></button>
+            <div class="sidebar-content">
+                <img id="sidebarImage" src alt="Design Image">
+                <p id="sidebarName"></p>
+                <p id="sidebarValue"></p>
+                <p id="sidebarDesc"></p>
+            </div>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="/javascripts/nav.js"></script>
-    <script src="/javascripts/productDetail.js"></script>
-</body>
+        <script
+            src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+        <script src="/javascripts/nav.js"></script>
+        <script src="/javascripts/productDetail.js"></script>
+    </body>
 
 </html>

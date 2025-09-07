@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const dbMongoose = require('./config/mongooseConnection');
+const {connectDB} = require('./config/mongooseConnection');
 const expressSession = require('express-session');
 const flash = require('connect-flash');
 const index = require('./routes/index');
@@ -11,9 +11,16 @@ const usersRouter = require('./routes/usersRouter');
 const productsRouter = require('./routes/productsRouter');
 const isLoggedIn = require('./middlewares/isLoggedIn');
 const jwt = require("jsonwebtoken");
-
+const dotenv = require('dotenv');
 require('dotenv').config();
 
+
+(async () => {
+  await connectDB();              
+  app.listen(3000, () => {
+    console.log("Server running on 3000");
+  });
+})();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -30,7 +37,7 @@ app.use(flash());
 const userModel = require('./models/userModel');
 
 app.use(async (req, res, next) => {
-  console.log('loggedIn:', req.cookies.loggedIn, 'isOwner:', req.cookies.isOwner);
+  // console.log('loggedIn:', req.cookies.loggedIn, 'isOwner:', req.cookies.isOwner);
   res.locals.loggedIn = req.cookies.loggedIn === 'true';
   res.locals.isOwner = req.cookies.isOwner === 'true';
   res.locals.success_msg = req.flash('success_msg');
@@ -45,7 +52,7 @@ app.use(async (req, res, next) => {
 
       req.user = currentUser;
       res.locals.user = currentUser;
-      console.log("✅ Logged in as:", currentUser?.email);
+      // console.log("✅ Logged in as:", currentUser?.email);
 
     } else {
       req.user = null;
@@ -69,6 +76,3 @@ app.use('/', index);
 app.use('/owners', ownerRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
-
-
-app.listen(3000);

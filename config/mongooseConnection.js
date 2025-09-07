@@ -1,13 +1,21 @@
-const mongoose = require('mongoose');
-const config = require('config');
-const dbgr = require('debug')('development:mongoose');
+// db.js
+const mongoose = require("mongoose");
+const config = require("config");
+const dbgr = require("debug")("development:mongoose");
 
-mongoose.connect(`${config.get("MONGODB_URI") || 'mongodb://127.0.0.1:27017'}/ecommerce`)
-.then(function(){
-    dbgr("Connected to MongoDB");
-})
-.catch(function(err){
-    dbgr("Error connecting to MongoDB:", err);
-})
+async function connectDB() {
+  try {
+    const uri = `${config.get("MONGODB_URI")}/ecommerce`;
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 10000,
+    });
+    dbgr("✅ Connected to MongoDB");
+  } catch (err) {
+    dbgr("❌ MongoDB connection error:", err.message);
+    process.exit(1); // stop server if db failed
+  }
+}
 
-module.exports = mongoose.connection;
+module.exports = { connectDB, connection: mongoose.connection };
